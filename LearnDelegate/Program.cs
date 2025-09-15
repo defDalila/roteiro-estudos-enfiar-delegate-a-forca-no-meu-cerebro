@@ -1,10 +1,28 @@
 ﻿using System.Globalization;
-using System.Reflection;
 using Delegates;
+using LearnDelegate.Models;
 
 Console.Clear();
 
+Alarme alarme = new Alarme();
 
+// Inscrevendo dois métodos no evento
+alarme.AoDisparar += AvisoConsole;
+alarme.AoDisparar += RegistrarLog;
+
+// Disparando o alarme
+alarme.Disparar();
+    
+
+    static void AvisoConsole(string msg)
+{
+    Console.WriteLine($"[Aviso] {msg}");
+}
+
+static void RegistrarLog(string msg)
+{
+    Console.WriteLine($"[Log] {DateTime.Now}: {msg}");
+}
 
 Console.Write("Tecle enter para fechar...");
 Console.ReadKey();
