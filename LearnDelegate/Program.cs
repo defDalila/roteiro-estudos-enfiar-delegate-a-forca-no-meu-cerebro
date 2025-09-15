@@ -1,11 +1,13 @@
 ﻿using System.Globalization;
+using System.Reflection;
 using Delegates;
 
 Console.Clear();
 
+
+
 Console.Write("Tecle enter para fechar...");
 Console.ReadKey();
-
 
 
 
@@ -85,4 +87,76 @@ static void Exercicio02_Desafio()
         Console.WriteLine(inicioMaiusculo);
         Console.WriteLine();
     }
+}
+
+static void Exercicio03()
+{
+    Operacao op = Somar;
+    Executar(5, 3, op);
+
+    op = Subtrair;
+    Executar(5, 3, op);
+
+    op = Multiplicar;
+    Executar(5, 3, op);
+
+    op = Dividir;
+    Executar(5, 3, op);
+
+    Console.WriteLine();
+
+    Executar(5, 3, Somar);
+    Executar(5, 3, Subtrair);
+    Executar(5, 3, Multiplicar);
+    Executar(5, 3, Dividir);
+
+
+
+    static int Somar(int a, int b) => a + b;
+    static int Subtrair(int a, int b) => a - b;
+    static int Multiplicar(int a, int b) => a * b;
+    static int Dividir(int a, int b) => Convert.ToInt32((double)a / b);
+
+    static void Executar(int x, int y, Operacao op)
+    {
+        Console.WriteLine($" {op(x, y)}");
+        Console.WriteLine();
+
+
+    }
+}
+
+static void Exercicio04()
+{
+    static int Somar(int a, int b) => a + b;
+    static int Subtrair(int a, int b) => a - b;
+    static int Multiplicar(int a, int b) => a * b;
+    static int Dividir(int a, int b) => Convert.ToInt32((double)a / b);
+
+
+
+    static void Executar(int x, int y, Func<int, int, int> operacao)
+    {
+        Console.WriteLine($" {operacao(x, y)}");
+        Console.WriteLine();
+    }
+
+    Func<int, int, int> operacao = Somar;
+    Executar(5, 3, operacao);
+}
+
+static void Exercicio04_Desafio()
+{
+    void ExibirMaiuscula(string texto, Action<string> action)
+    {
+        var upper = texto.ToUpper();
+
+        action(upper);
+    }
+
+
+    ExibirMaiuscula("Dalila", msg => Console.WriteLine(msg));
+
+    void Mostrar(string s) => Console.WriteLine($"Texto recebido: {s}");
+    ExibirMaiuscula("Lady Gauss", Mostrar);
 }
